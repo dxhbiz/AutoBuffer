@@ -1,3 +1,13 @@
+AutoBuffer自动处理buffer数据的工具！
+
+安装
+
+```javascript
+npm install AutoBuffer
+```
+
+测试用例
+```javascript
 var AutoBuffer = require('./AutoBuffer');
 /**
  * 构造函数参数说明，默认使用低位进行计算
@@ -86,5 +96,4 @@ var data = new AutoBuffer({
 }).int8().int16().string(11).int32().int64().unpack();
 
 console.log(data);
-
-
+```

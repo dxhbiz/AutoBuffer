@@ -1,9 +1,9 @@
 {
-    "name" : "AutoBuffer",
+    "name" : "autobuffer",
     "description" : "自动处理buffer数据，适合粘连包使用",
     "homepage" : "https://github.com/dxhbiz/AutoBuffer",
     "keywords" : ["Buffer","tcp","socket"],
     "author" : "dxhbiz",
     "main" : "AutoBuffer.js",
-    "version" : "0.0.1"
+    "version" : "0.0.2"
 }

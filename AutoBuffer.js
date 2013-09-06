@@ -41,7 +41,7 @@ AutoBuffer.prototype.data = function(value, types, sizes, reader, writer) {
             bit += "Int32";
             break;
         case INT64:
-            bit += "Int64";
+            bit += "Double";
             break;
         case STRING:
             bit += "String";
@@ -58,7 +58,7 @@ AutoBuffer.prototype.data = function(value, types, sizes, reader, writer) {
         bit += this._endian;
     }
     st.rm = (st.rm == undefined) ? 'read' + bit : st.rm;
-    st.wm = (st.wm == undefined) ? 'read' + bit : st.wm;
+    st.wm = (st.wm == undefined) ? 'write' + bit : st.wm;
     st.read = (reader == undefined) ? Buffer.prototype['read' + bit] : reader;
     st.write = (writer == undefined) ? Buffer.prototype['write' + bit] : writer;
     return st;
@@ -105,6 +105,17 @@ AutoBuffer.prototype.int16 = function(val, index) {
 
 AutoBuffer.prototype.int32 = function(val, index) {
     var d = this.data(val, 3, 4);
+    if (val == undefined || val == null) {
+        this._list.push(d.read.apply(this._buf, [this._offset, this._noAssert]));
+    } else {
+        this._list.splice((index != undefined ? index : this._list.length), 0, d);
+    }
+    this._offset += d.size;
+    return this;
+};
+
+AutoBuffer.prototype.int64 = function(val, index) {
+    var d = this.data(val, 4, 8);
     if (val == undefined || val == null) {
         this._list.push(d.read.apply(this._buf, [this._offset, this._noAssert]));
     } else {
